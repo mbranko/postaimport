@@ -3,6 +3,7 @@ package com.ftninformatika.bisis.postaimport;
 import com.gint.app.bisis4.records.*;
 import com.gint.app.bisis4.records.serializers.FullFormatSerializer;
 import com.gint.util.string.StringUtils;
+import javafx.scene.shape.PathElement;
 import org.apache.commons.cli.*;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -83,7 +84,7 @@ public class ImportApp {
 
     for (Record record: sortedList) {
       processRecord(record);
-      record.sort();  
+      record.sort();
     }
 
 
@@ -236,8 +237,13 @@ public class ImportApp {
     if (mYear.find())
       addSubfield(rec, "210d", mYear.group(1));
 
+    Matcher mPublisher = pPublisher.matcher(tekst);
+    if (mPublisher.find())
+      addSubfield(rec, "210c", mPublisher.group(2));
   }
 
+  private static final String gradovi = "Beograd|Zagreb|Cetinje|Београд|Цетиње|Загреб";
   private static final Pattern pYear = Pattern.compile(".*(\\d{4}).*");
-  private static final Pattern pCity = Pattern.compile(".*(?i)(Beograd|Zagreb|Cetinje|Београд|Цетиње|Загреб).*");
+  private static final Pattern pCity = Pattern.compile(".*(?i)(" + gradovi + ").*");
+  private static final Pattern pPublisher = Pattern.compile(".*(?i)(" + gradovi + ")\\p{Punct} (\\p{IsAlphabetic}[\\p{IsAlphabetic}\\p{Digit} ]*).*");
 }

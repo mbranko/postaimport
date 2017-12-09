@@ -3,7 +3,6 @@ package com.ftninformatika.bisis.postaimport;
 import com.gint.app.bisis4.records.*;
 import com.gint.app.bisis4.records.serializers.FullFormatSerializer;
 import com.gint.util.string.StringUtils;
-import javafx.scene.shape.PathElement;
 import org.apache.commons.cli.*;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -12,6 +11,8 @@ import org.apache.poi.ss.usermodel.Row;
 
 import java.io.*;
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,6 +20,7 @@ import java.util.regex.Pattern;
 public class ImportApp {
 
   public static void main(String[] args) throws Exception {
+    setupPatterns();
     Options options = new Options();
     options.addOption("i", true, "Ulazni fajl");
     options.addOption("o", true, "Izlazni fajl");
@@ -103,8 +105,8 @@ public class ImportApp {
                                   String signatura, String napomena, int rowCount) {
     Record rec = new Record();
     rec.setRecordID(rowCount-4);
-    rec.setCreator(new Author("import", "pttmuzej.rs"));
-    rec.setModifier(new Author("import", "pttmuzej.rs"));
+    rec.setCreator(new Author("import", "bibliotekaPTTmuzeja.posta.rs"));
+    rec.setModifier(new Author("import", "bibliotekaPTTmuzeja.posta.rs"));
     rec.setCreationDate(new Date());
     rec.setLastModifiedDate(new Date());
     rec.setPubType(1);
@@ -116,9 +118,6 @@ public class ImportApp {
     addSubfield(rec, "200a", tekst);
     rec.getField("200").setInd1('1');
 
-    //addSubfield(rec, "210a", "Beograd");
-    //addSubfield(rec, "210d", "2000");
-
     addSubfield(rec, "215d", dimenzije);
     addSubfield(rec, "675a", signatura);
 
@@ -126,13 +125,14 @@ public class ImportApp {
     rec.pack();
 
     Primerak p = new Primerak();
-    p.setInvBroj(getInvBroj(invbr, rowCount, "01"));
+    p.setInvBroj(getInvBroj(invbr, rowCount, "00"));
     p.setPovez(getPovez(povez));
     p.setNacinNabavke(getNacinNabavke(obavezni, kupovina, razmena, poklon));
     p.setNapomene(napomena);
     p.setSigUDK(signatura);
     p.setCena(getCena(cena));
     p.setPovez(getPovez(povez));
+    p.setDatumInventarisanja(getDatum(datum));
     rec.getPrimerci().add(p);
 
     return rec;
@@ -242,8 +242,37 @@ public class ImportApp {
       addSubfield(rec, "210c", mPublisher.group(2));
   }
 
-  private static final String gradovi = "Beograd|Zagreb|Cetinje|Београд|Цетиње|Загреб";
-  private static final Pattern pYear = Pattern.compile(".*(\\d{4}).*");
-  private static final Pattern pCity = Pattern.compile(".*(?i)(" + gradovi + ").*");
-  private static final Pattern pPublisher = Pattern.compile(".*(?i)(" + gradovi + ")\\p{Punct} (\\p{IsAlphabetic}[\\p{IsAlphabetic}\\p{Digit} ]*).*");
+  private static Date getDatum(String content) {
+    if (content == null || content.trim().length() == 0)
+      return null;
+    Date retVal = null;
+    String sDate = content.trim();
+    for (DateFormat df: dateFormats) {
+      try {
+        retVal = df.parse(sDate);
+        break;
+      } catch (Exception ex) {
+      }
+    }
+    return retVal;
+  }
+
+  private static void setupPatterns() {
+    gradovi = "Beograd|Zagreb|Cetinje|Београд|Цетиње|Загреб";
+    gradovi += "|Berlin|Berne|Bern|London|Londres|Washington|Leipzig|Budapest|Wien|Vienna|Prag|Praze|Praha|Geneve";
+    gradovi += "|Paris|Madrid|Bruxelles|Stockholm|Copenhagen|Copenhague|Munchen";
+    pYear = Pattern.compile(".*(\\d{4}).*");
+    pCity = Pattern.compile(".*(" + gradovi + ").*");
+    pPublisher = Pattern.compile(".*(?i)(" + gradovi + ")\\p{Punct} (\\p{IsAlphabetic}[\\p{IsAlphabetic}\\p{Digit} ]*).*");
+  }
+
+  private static String gradovi;
+  private static Pattern pYear;
+  private static Pattern pCity;
+  private static Pattern pPublisher;
+  private static DateFormat dateFormat1 = new SimpleDateFormat("dd.MM. yyyy.");
+  private static DateFormat dateFormat2 = new SimpleDateFormat("dd.MM.yyyy.");
+  private static DateFormat dateFormat3 = new SimpleDateFormat("dd.MM .yyyy.");
+  private static DateFormat dateFormat4 = new SimpleDateFormat("dd.MM yyyy.");
+  private static DateFormat[] dateFormats = { dateFormat1, dateFormat2, dateFormat3, dateFormat4 };
 }

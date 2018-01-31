@@ -1,0 +1,24 @@
+1. Monografske publikacije su verovatno prepisane OK, sa ukljucenim primedbama koje smo dobili na papiru. Ograda: kada se ne prepozna mesto izdanja, tada se ne moze prepoznati ni izdavac!
+
+2. Pocetni RN za serijske zapise zavisi od poslednjeg RN-a monografskih.
+
+3. Prefiksi u aplikaciji su na engleskom umesto na srpskom.
+
+4. Korisnicko pretrazivanje: prilikom prikazivanja serijskih publikacija treba dodati prikaz inventarnih brojeva i godina, da bi korisnik mogao da vidi da li postoji bas ta godina trazenog casopisa.
+
+5. Pitanje je gde smestiti broj svesaka iz excel fajla. Trenutno taj broj nije nigde upisan. Jedna mogucnost: u signaturu koja nije pretraziva na zgodan nacin, druga mogucnost: u napomenu koja je vec zauzeta, itd.
+
+6. U importu serijskih publikacija treba da postoji fiksno jedna sveska za svako godiste. Tako se radi zaduzivanje jer su njima kompletna godista ukoricena.
+
+7. Inventarna knjiga za monografske: podesiti naslov i proveriti da li generalno dobro radi
+
+8. Inventarna knjiga za serijske: nije napravljena
+
+9. Podesiti revers: naziv biblioteke, itd. Stampanje reversa zahteva da oni povezu stampac na odgovarajuci nacin.
+
+10. Za inicijalizaciju cirkulacije potrebno je definisati sifarnike:
+a) odeljenje, u njemu jedna stavka sa sifrom 0: biblioteka
+b) kategorija korisnika
+c) vrsta clanstva
+U podesavanju cirkulacije default odeljenje treba postaviti na 0 i lokaciju racunara na 0
+

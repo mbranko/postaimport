@@ -287,9 +287,14 @@ public class SerialApp {
   }
 
   private static void setupPatterns() {
-    gradovi = "Beograd|Zagreb|Cetinje|Београд|Цетиње|Загреб";
-    gradovi += "|Novi Sad|Нови Сад|Niš|Ниш|Sarajevo|Сарајево|Skopje|Скопје|Osijek|Осијек|Leskovac|Лесковац|Titograd|Титоград";
-    gradovi += "|Бањалука|Banjaluka|Kotor|Котор|Vranje|Врање|Čačak|Чачак|Šabac|Шабац|Požarevac|Пожаревац|Smederevo|Смедерево";
+    gradovi = "Beograd|Zagreb|Cetinje|Београд|Цетиње|Загреб|Ljubljana|Vukovar|Atina|Атина|Pula|Niš|Ниш";
+    gradovi += "|Охрид|Varaždin|Смедерево|Zadar|Vranje|Врање|Osijek|Novo Mesto|Novi Sad|Нови Сад|Sarajevo|Сарајево";
+    gradovi += "|Tuzla|Тузла|Sremska Mitrovica|Сремска Митровица|Valjevo|Ваљево|Vršac|Вршац|Split|Vinkovci";
+    gradovi += "|Sombor|Сомбор|Pančevo|Панчево|Zemun|Земун|Skoplje|Skopje|Скопље|Скопје|Subotica|Суботица|Rijeka";
+    gradovi += "|Rio de Janeiro|Moskva|Москва|Sofia|Софиа|Cambridge|Leskovac|Лесковац|Titograd|Титоград";
+    gradovi += "|Berlin|Berne|Bern|London|Londres|Washington|Leipzig|Budapest|Wien|Vienna|Prag|Praze|Praha|Geneve";
+    gradovi += "|Paris|Madrid|Bruxelles|Stockholm|Copenhagen|Copenhague|Munchen|Timisoara|Caracas|Jerusalim|Peking";
+    gradovi += "|Бањалука|Banjaluka|Kotor|Котор|Čačak|Чачак|Šabac|Шабац|Požarevac|Пожаревац";
     pYear = Pattern.compile(".*(\\d{4}).*");
     pCity = Pattern.compile(".*(" + gradovi + ").*");
     pPublisher = Pattern.compile(".*(?i)(" + gradovi + ")\\p{Punct} (\\p{IsAlphabetic}[\\p{IsAlphabetic}\\p{Digit} ]*).*");

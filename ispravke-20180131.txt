@@ -1,3 +1,5 @@
+0. Bekapovati sadasnju bazu zbog podesavanja
+
 1. Monografske publikacije su verovatno prepisane OK, sa ukljucenim primedbama koje smo dobili na papiru. Ograda: kada se ne prepozna mesto izdanja, tada se ne moze prepoznati ni izdavac!
 
 2. Pocetni RN za serijske zapise zavisi od poslednjeg RN-a monografskih.
@@ -21,4 +23,6 @@ a) odeljenje, u njemu jedna stavka sa sifrom 0: biblioteka
 b) kategorija korisnika
 c) vrsta clanstva
 U podesavanju cirkulacije default odeljenje treba postaviti na 0 i lokaciju racunara na 0
+
+11. Dodati dve inventarne knjige: 0000 - monografske, 0001 - serijske
 

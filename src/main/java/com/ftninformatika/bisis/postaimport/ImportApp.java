@@ -175,6 +175,7 @@ public class ImportApp {
     for (Primerak p: r.getPrimerci()) {
       String sql4 = "SELECT counter_value INTO @primid FROM Counters WHERE counter_name='primerakid';\n";
       String sql5 = "UPDATE Counters SET counter_value=counter_value+1 WHERE counter_name='primerakid';\n";
+      String sql5a = "INSERT IGNORE INTO Interna_oznaka (IntOzn_id, IntOzn_opis) VALUES ('" + p.getSigIntOznaka() + "', 'Polica " + p.getSigIntOznaka() + "');\n";
       String sql6 = "INSERT INTO Primerci (" +
           "primerak_id, record_id, sigformat_id, podlokacija_id, " +
           "intozn_id, odeljenje_id, nacin_id, povez_id, status_id, datum_statusa, " +
@@ -209,6 +210,7 @@ public class ImportApp {
           ConvUtils.sql(p.getInventator()) + ");\n";
       sb.append(sql4);
       sb.append(sql5);
+      sb.append(sql5a);
       sb.append(sql6);
     }
     sb.append("\n");

@@ -240,6 +240,7 @@ public class SerialApp {
     for (Godina g: r.getGodine()) {
       String sql4 = "SELECT counter_value INTO @godid FROM Counters WHERE counter_name='godinaid';\n";
       String sql5 = "UPDATE Counters SET counter_value=counter_value+1 WHERE counter_name='godinaid';\n";
+      String sql5a = "INSERT IGNORE INTO Interna_oznaka (IntOzn_id, IntOzn_opis) VALUES ('" + g.getSigIntOznaka() + "', 'Polica " + g.getSigIntOznaka() + "');\n";
       String sql6 = "INSERT INTO Godine (" +
           "godina_id, record_id, sigformat_id, podlokacija_id, " +
           "intozn_id, odeljenje_id, nacin_id, povez_id, " +
@@ -272,6 +273,7 @@ public class SerialApp {
           ConvUtils.sql(g.getBroj()) + ");\n";
       sb.append(sql4);
       sb.append(sql5);
+      sb.append(sql5a);
       sb.append(sql6);
       for (Sveska s: g.getSveske()) {
         String sql7 = "SELECT counter_value INTO @sveskaid FROM Counters WHERE counter_name='sveskaid';\n";

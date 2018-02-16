@@ -170,6 +170,14 @@ public class SerialApp {
       }
     }
 
+    Sveska s = new Sveska();
+    s.setParent(g);
+    g.getSveske().add(s);
+    s.setInvBroj("0099" + g.getInvBroj().substring(4));
+    s.setSignatura(g.getSigUDK());
+    s.setKnjiga(g.getGodiste());
+    s.setBrojSveske("" + odBroja + "-" + doBroja + " (" + brojSvezaka + ")");
+    /*
     for (int i = odBroja; i <= doBroja; i++) {
       Sveska s = new Sveska();
       s.setParent(g);
@@ -179,6 +187,7 @@ public class SerialApp {
       s.setBrojSveske(Integer.toString(i));
       s.setSignatura(g.getSigUDK());
     }
+    */
     return rec;
   }
 

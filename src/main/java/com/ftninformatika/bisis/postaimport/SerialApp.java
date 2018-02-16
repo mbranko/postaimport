@@ -136,7 +136,7 @@ public class SerialApp {
     g.setNacinNabavke(ConvUtils.getNacinNabavke("", kupovina, razmena, poklon));
     g.setCena(ConvUtils.getCena(cena));
     g.setSigUDK(signatura);
-    g.setNapomene(napomena.trim());
+    g.setSigIntOznaka(napomena.trim());
     g.setPovez(ConvUtils.getPovez(povezano, nepovezano));
     g.setGodiste(getGodiste(godiste));
     g.setGodina(getGodina(godiste));

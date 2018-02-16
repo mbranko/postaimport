@@ -129,7 +129,7 @@ public class ImportApp {
     p.setInvBroj(ConvUtils.getInvBroj(invbr, rowCount, "0000"));
     p.setPovez(ConvUtils.getPovez(povez));
     p.setNacinNabavke(ConvUtils.getNacinNabavke(obavezni, kupovina, razmena, poklon));
-    p.setNapomene(napomena);
+    p.setSigIntOznaka(napomena);
     p.setSigUDK(signatura);
     p.setCena(ConvUtils.getCena(cena));
     p.setPovez(ConvUtils.getPovez(povez));

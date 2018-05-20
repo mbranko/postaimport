@@ -136,11 +136,15 @@ public class SerialApp {
     g.setNacinNabavke(ConvUtils.getNacinNabavke("", kupovina, razmena, poklon));
     g.setCena(ConvUtils.getCena(cena));
     g.setSigUDK(signatura);
+    if (napomena != null && napomena.trim().length() > 4)
+      napomena = napomena.trim().substring(0, 4);
     g.setSigIntOznaka(napomena.trim());
     g.setPovez(ConvUtils.getPovez(povezano, nepovezano));
     g.setGodiste(getGodiste(godiste));
     g.setGodina(getGodina(godiste));
+    g.setSigNumeracija(g.getGodina());
     g.setBroj(getSveske(godiste));
+    g.setOdeljenje("00");
     rec.getGodine().add(g);
 
     int odBroja = 0;
@@ -245,7 +249,7 @@ public class SerialApp {
           "godina_id, record_id, sigformat_id, podlokacija_id, " +
           "intozn_id, odeljenje_id, nacin_id, povez_id, " +
           "inv_broj, datum_racuna, broj_racuna, dobavljac, cena, " +
-          "finansijer, sig_dublet, sig_numerus_curens, sig_udk, " +
+          "finansijer, sig_dublet, sig_numerus_curens, sig_udk, sig_numeracija, " +
           "datum_inventarisanja, napomene, dostupnost_id, inventator, godiste, godina, broj) VALUES (" +
           "@godid+1, " +
           "@recid+1, " +
@@ -264,6 +268,7 @@ public class SerialApp {
           ConvUtils.sql(g.getSigDublet()) + ", " +
           ConvUtils.sql(g.getSigNumerusCurens()) + ", " +
           ConvUtils.sql(g.getSigUDK()) + ", " +
+          ConvUtils.sql(g.getSigNumeracija()) + ", " +
           ConvUtils.sql(g.getDatumInventarisanja()) + ", " +
           ConvUtils.sql(g.getNapomene()) + ", " +
           ConvUtils.sql(g.getDostupnost()) + ", " +

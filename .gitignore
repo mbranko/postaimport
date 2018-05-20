@@ -29,3 +29,4 @@ out/
 gradlew
 gradlew.bat
 
+.idea/
